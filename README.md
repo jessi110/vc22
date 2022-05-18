@@ -1,3 +1,47 @@
+// masukkan TOKEN BOT dari BOT Father
+const token = '5328310433:AAHxugsxGE3w_Drs_ISSecF3ricoWzFJXI4'
+
+const tg = new telegram.daftar(token)
+
+// masukkan ID kamu, jika belum tau cek di @strukturbot
+const adminBot = 5097348378
+
+// jika debug true, akan mengirimkan struktur JSON ke admin bot
+const debug = false
+
+// -- fungsi telegram
+
+// cek informasi bot
+function getMe() {
+  let me = tg.getMe()
+  return Logger.log(me)
+}
+
+function setWebhook() {
+  var url = "https://script.google.com/macros/s/AKfycbxaOR1NMV4lM4os2P7fmTDvTtiL8wHxISoponv9ttBUUw8VGM8Iw8BX7h2tJ-fsYvd7mQ/exec"
+  var r = tg.setWebhook(url)
+  return Logger.log(r)
+}
+
+// cek info hook bot
+function getWebhookInfo() {
+  let hasil = tg.getWebhookInfo()
+  return Logger.log(hasil)
+}
+
+// hapus hook
+function deleteWebhook() {
+  let hasil = tg.deleteWebhook()
+  return Logger.log(hasil)
+
+}
+
+// -- kalau mau bikin fungsi sendiri, taruh di bawah sini ---
+
+
+proses
+
+
 // fungsi buat handle hanya menerima pesan berupa POST, kalau GET keluarkan pesan error
 function doGet(e) {
   return tg.util.outputText("Hanya data POST yang kita proses yak!");
