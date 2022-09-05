@@ -1,223 +1,49 @@
-// masukkan TOKEN BOT dari BOT Father
-const token = '5328310433:AAHxugsxGE3w_Drs_ISSecF3ricoWzFJXI4'
+<html lang="en">
+  
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <title>Pesan Dariku Untukmu &#128157</title>
+    <style>@import url(https://fonts.googleapis.com/css?family=Ubuntu); @import url(https://fonts.googleapis.com/css?family=Handlee); * { padding: 0; margin: 0; font-family: "Ubuntu", sans-serif; } body { background: #eed9af; } .copyright { text-decoration: none; position: fixed; bottom: 10px; left: calc(50vw - 85px); width: 170px; display: flex; justify-content: space-around; align-items: center; color: white; z-index: 99; opacity: 0.4; } .bg { position: absolute; height: 100%; width: 100%; background-size: cover; background-position: center; filter: brightness(0.5); } .content { color: white; height: 100%; text-align: center; display: flex; justify-content: center; align-items: center; align-content: center; position: relative; z-index: 2; } .card { background: rgba(0, 0, 0, 0.5); padding: 35px 40px; border-radius: 20px; } .content img.surat { margin: 25px auto; animation: animasi1 1s ease infinite; height: 90px; cursor: pointer; } @keyframes animasi1 { 0% { transform: scale(1.03); } 50% { transform: scale(1); } 100% { transform: scale(1.03); } } @keyframes animasi2 { 0% { transform: translateY(0); } 50% { transform: translateY(5px); } 100% { transform: translateY(0); } } .content2 { position: fixed; z-index: 3; top: 0; height: 100%; width: 100%; background: rgba(0, 0, 0, 0.575); display: none; } .content2 .wa { text-align: center; display: none; } .content2 .wa button { background-image: linear-gradient(to top left, #ff009d, #ff004c); padding: 7px 20px; margin: 50px auto; border-radius: 10px; font-size: 1.1rem; font-weight: 600; color: white; border: 2px solid white; animation: animasi2 1s ease infinite; } .paper { position: relative; width: 80%; max-width: 800px; min-width: 360px; height: 480px; margin: 0 auto; margin-top: 60px; background: #fafafa; border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); overflow: hidden; } .paper:before { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 40px; background: radial-gradient(#575450 6px, transparent 7px) repeat-y; background-size: 30px 30px; border-right: 3px solid #d44147; box-sizing: border-box; } .paper-content { position: absolute; top: 30px; right: 0; bottom: 30px; left: 40px; background: linear-gradient(transparent, transparent 28px, #91d1d3 28px); background-size: 30px 30px; } .paper-content textarea { width: 100%; max-width: 100%; height: 100%; max-height: 100%; line-height: 30px; padding: 0 10px; border: 0; outline: 0; background: transparent; color: rgb(0, 0, 0); font-family: "Handlee", cursive; font-weight: bold; font-size: 17px; box-sizing: border-box; z-index: 1; } </style>
+  </head>
+  <body>
 
-const tg = new telegram.daftar(token)
+    <audio autoplay type="audio" loop="" class="audio"></audio>
+    <div class="bg"></div>
 
-// masukkan ID kamu, jika belum tau cek di @strukturbot
-const adminBot = 5097348378
-
-// jika debug true, akan mengirimkan struktur JSON ke admin bot
-const debug = false
-
-// -- fungsi telegram
-
-// cek informasi bot
-function getMe() {
-  let me = tg.getMe()
-  return Logger.log(me)
-}
-
-function setWebhook() {
-  var url = "https://script.google.com/macros/s/AKfycbxaOR1NMV4lM4os2P7fmTDvTtiL8wHxISoponv9ttBUUw8VGM8Iw8BX7h2tJ-fsYvd7mQ/exec"
-  var r = tg.setWebhook(url)
-  return Logger.log(r)
-}
-
-// cek info hook bot
-function getWebhookInfo() {
-  let hasil = tg.getWebhookInfo()
-  return Logger.log(hasil)
-}
-
-// hapus hook
-function deleteWebhook() {
-  let hasil = tg.deleteWebhook()
-  return Logger.log(hasil)
-
-}
-
-// -- kalau mau bikin fungsi sendiri, taruh di bawah sini ---
-
-
-proses
-
-
-// fungsi buat handle hanya menerima pesan berupa POST, kalau GET keluarkan pesan error
-function doGet(e) {
-  return tg.util.outputText("Hanya data POST yang kita proses yak!");
-}
-
-// fungsi buat handle pesan POST
-function doPost(e) {
-  // data e kita verifikasi
-  let update = tg.doPost(e);
-
-  try {
-    if (debug) return tg.sendMessage(adminBot, JSON.stringify(update, null, 2))
-    prosesPesan(update)
-  } catch (e) {
-    tg.sendMessage(adminBot, e.message)
-  }
-
-}
-
-// fungsi utama untuk memproses segala pesan yang masuk
-function prosesPesan(update) {
-
-  // deteksi tipe message
-  if (update.message) {
-
-    // penyederhanaan variable
-    var msg = update.message;
-
-    // deteksi event letakkan di sini
-    if (msg.new_chat_members) {
-      var newUser = msg.new_chat_members[0];
-
-      var nama = newUser.first_name;
-      if (newUser.last_name)
-        nama += " " + newUser.last_name;
-
-      //rangkai ucapan welcome
-      var teks = "Selamat datang, bos <b>" + nama + "</b>. \n💁🏻‍♀️ berikut event kami yang masih berjalan ya bos ku 🔥 \n\n★=SLOT=★ \n🎰	BONUS JACKPOT FREE SPIN MURNI 25%🚨 \n🎰 BONUS JACKPOT BUY SPIN 15%🚨 \n🎰 BONUS  DEPOSIT 10% SETIAP HARI🚨 \n\n☆=SPORTSBOOK=☆ \n⚽ CASHBACK BOLA 10%🚨 \n⚽ EVENT WIN STREAK🚨 \n⚽ XTRA WIN PARLAY🚨 \n⚽ CASHBACK PARLAY 100%🚨 \n⚽ KOMPETISI PARLAY 5 TEAM 🚨<b>SETIAP HARI</b>🚨 \n\n★=CASINO=★ \n🎲 LUCKY TICKET CASINO🚨 \n🎲 WIN STREAK CASINO🚨 \n\nUntuk <b>POLA</b> Ke <b>REAL ADMIN</b> ya bos ku \n\nSyarat dan ketentuan EVENT bisa klick di bawah ini ya bos \n👇👇👇👇👇👇👇👇👇👇👇 \n🎰 /SLOT 🚨 \n⚽ /BOLA 🚨 \n🎲 /CASINO 🚨 \n♠ /POKER 🚨 \n🎱 /TOGEL 🚨 \n🚨 /GACOR 📢";
-
-      var keyboard = []
-
-        // keyboard baris pertama
-        // index dimulai dari 0
-        keyboard[0] = [
-          tg.button.url('💯 Link Daftar 💦', 'https://magic.ly/info_slot'),
-          tg.button.url('👥 REAL ADMIN', 'https://t.me/csindoacejessica'),
-        ];
-
-        keyboard[1] = [
-          tg.button.url('📞 Whatsapp 📞', 'https://wa.me/6281291093447'),
-        ];
-
-      // kirim pesan welcome
-      return tg.sendMsgKeyboardInline(msg, teks, keyboard, 'HTML');
+    <div class="content animate__animated animate__bounceInDown">
+      <div class="card">
+        <div>
+          <h3>Ada pesan buat kamu</h3>
+        </div>
+        <img onclick="tampil()" class="surat" src="https://subscribe.naisid.repl.co/mail.png" alt="MAIL" />
+        <p>Tekan untuk membuka</p>
+      </div>
+    </div>
+    <div class="content2">
+      <div class="paper animate__animated animate__bounceIn" id="content2">
+        <div class="paper-content">
+          <textarea class="pesan" disabled></textarea>
+        </div>
+      </div>
+      <div class="wa animate__animated animate__fadeInUp">
+        <button onclick="balasWA()">Balas Pesan</button>
+      </div>
+    </div>
+    <a href="https://jeluga.com/" class="copyright" ><p class="cr"><i class="material-icons-sharp cr-logo"> copyright </i></p> <p class="cpr">Jeluga</p></a >
+    <script>
       
-    }
+      var musik = "Musik satu.mp3";
+      var background = "Foto satu.jpg"; 
+      var ucapanSurat = "Kalau kamu tanya berapa kali kamu datang ke pikiranku, jujur aja cuma sekali. Sekali tapi nggak pergi-pergi.";
+      var pesanWhatsapp = "Bisa aja kamu🤭"
 
-    // jika ada pesan berupa text
-    if (msg.text) {
-
-      // jika user klik start, bot akan menjawab
-      var pola = /\/event/i
-      if (pola.exec(msg.text)) {
-        var nama = msg.from.first_name
-        if (msg.from.last_name)
-          nama += ' ' + msg.from.last_name
-        // perhatikan, ini menggunakan sendMsg bukan sendMessage
-        var pesan = "🙋🏽 Halo, <b>" + tg.util.clearHTML(nama) + "</b>, \n🛠 <b>INFO EVENT PROMO BONUS BO INDOACE</b> ⚒ \n\n💁🏻‍♀️ berikut event kami yang masih berjalan ya bos ku 🔥 \n\n★=SLOT=★ \n🎰	BONUS JACKPOT FREE SPIN MURNI 25% 🚨 \n🎰 BONUS JACKPOT BUY SPIN 15% 🚨 \n🎰 BONUS  DEPOSIT 10% SETIAP HARI 🚨 \n\n☆=SPORTSBOOK=☆ \n⚽CASHBACK BOLA 10% 🚨 \n⚽ EVENT WIN STREAK 🚨 \n⚽ XTRA WIN PARLAY 🚨 \n⚽ CASHBACK PARLAY 100% 🚨 \n⚽ KOMPETISI PARLAY 5 TEAM 🚨 <b>SETIAP HARI</b> 🚨 \n\n★=CASINO=★ \n🎲 LUCKY TICKET CASINO 🚨 \n🎲 WIN STREAK CASINO 🚨 \n\n☆=POKER & TOGEL=☆ \n♠ BONUS KOMISI 0,3% 🚨 Untuk <b>POLA</b> Ke <b>REAL ADMIN</b> ya bos ku \n\nuntuk syarat dan ketentuan klick di bawah ini ya bos \n👇👇👇👇👇👇👇👇👇👇👇 \n🎰 /SLOT 🚨 \n⚽ /BOLA 🚨 \n🎲 /CASINO 🚨 \n♠ /POKER 🚨 \n🎱 /TOGEL 🚨 \n🚨 /GACOR 📢"
-
-        var keyboard = []
-
-        // keyboard baris pertama
-        // index dimulai dari 0
-        keyboard[0] = [
-          tg.button.url('💯 Link Daftar 💦', 'https://magic.ly/setting_slot'),
-          tg.button.url('👥 REAL ADMIN', 'https://t.me/csindoacejessica'),
-        ]
-
-        keyboard[1] = [
-          tg.button.url('📞 Whatsapp 📞', 'https://wa.me/6281291093447'),
-        ]
-
-        return tg.sendMsgKeyboardInline(msg, pesan, keyboard, 'HTML')
-      }
-
-      // jika user ketik /ping, bot akan jawab Pong!
-      // pola dan jawaban paling sederhana
-      var pola = /^[\/!]ping$/i
-      if (pola.exec(msg.text)) {
-        // balas pong dengan mereply pesan
-        // menggunakan parse_mode Markdown
-        return tg.sendMessage(msg.chat.id, '🏓 hallo bos, untuk info bisa klik /start atau /event ya bos ku \nJessica hanya menginfokan event promo bonus BO INODACE saja ya bos', 'Markdown', false, false, msg.message_id)
-      }
-
-
-      // jika user ketik /pong, sekalian dihitung selisihnya
-      // dan diberikan berbagai contoh kasus
-
-      // balas pong dengan mereply pesan
-      // menggunakan parse_mode Markdown
-      var pola = /^[\/!]Gacor/i
-      if (pola.exec(msg.text)) {
-
-        // awal waktu pakai timestampnya message saja
-        // jika bot macet timestamp pengirim tetap diperhitungkan
-        // pilihan lain bisa bikin time sendiri
-        var waktuAwal = msg.date
-        var hasil = tg.sendMessage(msg.chat.id, '<b>Gacor</b>', 'HTML', false, false, msg.message_id)
-
-        var newMsg = hasil.result
-        var waktuAkhir = new Date()
-
-        let Gacor = [
-          'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlOiTL2yspyBIOtKK7ehb3qg3GmvvTBbv1_i2hCODG52nGYNKSGCU_YTJDY655b47AjMCdJzzEQQBxxk5cgyUWrhMiOrSRrozmrrYpze0pR514ddtZ0tWjftawPtRGG6BgV6Yg4o77ooFzxuESjBm483emQ02tDQIo6K6xTLuX6Df7JIda0EYpXZuK/s1600/3.jpg',
-          'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjEyCP8u98rCK8bXS9jfHGyRKJLO_NWRc5H8mJVxT1_zVuk6iQ_tsnGFNIn6_pe3XIo57PGPJL-4B2epcvN62ok_PcXB3yW1Xaa-jEvxwSuBRi1ZM4GB9nsepbWCAFGM-Oz5vVlnB2BQEXB5KGm32SkbF8zflYDh3mr1Dxv3gAJdxB0gA--jot_f7z2/s1600/4.jpg',
-          'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhsgCcSPeQj0_Go5Uj0-Ykd2lvWzK0J06agmSgBH1eG4HtwCXf7L0FSbaRZ8IuDExP1se4_yvn-MsQsEi2Jmn7v6tyUv5qKQU7SHLnWdtPjvfC9wVLzJEUzD1lXVVFlnwRpa_SY2QTNAZqbV9uiCdJjhgPEeLFrdeKgqSULwnGerDU5h2HVBIBggmPT/s1600/5.jpg',
-          'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiU6H2uQGv7IqwcaMJRJGBhWPbqm1-hiqujkIekyVYxSctmqP4tcjumd-SgxvXCZI6Pz14VKthJnNN21Qubw06cZPQIW_T0tnDgCE4kQ0gBaDQXHdZ6IMhNMX0Ywq6kYpOgenZ5KdWTWY5Cz1p71ApITGthp7_c0oj0q_f5skRSatksjJNMj_mxf4S5/s1600/slot1.jpg',
-          'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiwQFExhmgBo5b4d8DtpxCNhXFc0E-s_XGFj2wxerAormYgq_SkCEGX0m9UMbDyeKvcfiSkECOmcRzu_zpooIv7OCRjcsLaeeiH8OrhGKcZ1TaLQI-gfvVahHWSkFCd5KDpxP4mXNngBYtKy6KgeIrrd0qvhi3t9nKuIMrm4PMdCQyXlKW3Vrlurxa6/s1600/slot2.jpg'
-        ]
-
-        // foto gambar disembunyikan di emoticon mie
-        var pesan = '<a href="' + tg.util.random(Gacor) + '">🚨</a> '
-        pesan += `🗣<b>Gas bos ku</b>.\n⚡ Untuk trik dan pola nya chat langsung ke \nREAL ADMIN kami ya bos @csindoacejessica.`
-
-        return tg.editMessageText(msg.chat.id, newMsg.message_id, false, pesan, 'HTML')
-      }
-
-      // kirim foto dari URL
-      var pola = /^[\/!](slot)/i
-      if (cocok = pola.exec(msg.text)) {
-        var url = 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEimGa1MIALgN6oyfwpdyFDWBryNuoAmGzOGtUXx8EQEKwbVT_p6VOb1QDutWu0RBBTXhb2vxNyVBH7tcDzHwXQUkT2wM8-J7VbO7_BUg4_OY0pFWSzEePaEYQGEG1WTirR_n0gAMDC6JRFBk4njbGblWJ6kO8TKBz5YiQ6av3WV_jyOlDae5V6_irF0/s1200/s&amp;k%20slot.jpg'
-        var caption = 'Syarat & Ketentuan: 🎰 EVENT SLOT 🎰 \nUntuk INFO lebih lanjut chat ke ADMIN kami ya bos @csindoacejessica'
-        return tg.sendPhoto(msg.chat.id, url, caption, 'HTML')
-      }
-
-      // kalau mau kembangin sendiri menjadi bot interaktif, code nya taruh di bawah ini
-      // -- mulai custom deteksi text --
-
-      var pola = /^[\/!](bola)/i
-      if (cocok = pola.exec(msg.text)) {
-        var url = 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgkBclkki2Xq0ujuUt_fNMHBdIP5S2yuQPhg68j6PuFOCMMmpdf7FXK6UPvJSFlcbER1mdgwTaaKsB3uqRHTuiEazhDsMiZum5dTWc0L3UR_WWxP76Pie2mXOQvDjHPG8clwyFc55tVnXq36tZoHxCELQrl42MJpLe0RJXqiL9dvp52AIkCjAO7PVAI/s16000/BOLA.jpg'
-        var caption = 'Syarat & Ketentuan: ⚽ EVENT BOLA ⚽ \nUntuk INFO lebih lanjut chat ke ADMIN kami ya bos @csindoacejessica'
-        return tg.sendPhoto(msg.chat.id, url, caption, 'HTML')
-      }
-
-      var pola = /^[\/!](casino)/i
-      if (cocok = pola.exec(msg.text)) {
-        var url = 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXC_XD4Y1Q2MdT49UwAQWR9BuhWchofTR3yEuwe6_2mBDJCxW9O71dBvp8wuxSNnG9VmUCn69MOycKnf8WIH-qex7Zb8QxgPsP4wyU_7ZupjOM7pOR7onAS0VhRZLfp48FXCnOgrloF7kdUqkovHkhYUbun1GROmSI5yFjcks_s0zDqui8ewv50chY/s16000/casino2.jpg'
-        var caption = 'Syarat & Ketentuan: 🎲 EVENT CASINO 🎲 \nUntuk INFO lebih lanjut chat ke ADMIN kami ya bos @csindoacejessica'
-        return tg.sendPhoto(msg.chat.id, url, caption, 'HTML')
-      }
-
-      var pola = /^[\/!](poker)/i
-      if (cocok = pola.exec(msg.text)) {
-        var url = 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhMnUWSFyjR7hKM4xY0MoXgiKhFdD6rufOSK-ILQfpmz3nFBWcJEV9LU5E1-XTcTg37XDuDn8nFBv6t3jZWEGDO8FdG_bd-b272dTCs-zTuuSFsLfDE5vm5eOP3snzfTdhgbbrVr6PQQH-DHdaARCyIFUTG9d7aTkdMfQ3cxsJALKXHDsmzja2_xEus/s16000/poker%20togel.jpg'
-        var caption = 'Syarat & Ketentuan: ♠ EVENT POKER DAN TOGEL 🎱 \nUntuk INFO lebih lanjut chat ke ADMIN kami ya bos @csindoacejessica'
-        return tg.sendPhoto(msg.chat.id, url, caption, 'HTML')
-      }
-
-      var pola = /^[\/!](togel)/i
-      if (cocok = pola.exec(msg.text)) {
-        var url = 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhMnUWSFyjR7hKM4xY0MoXgiKhFdD6rufOSK-ILQfpmz3nFBWcJEV9LU5E1-XTcTg37XDuDn8nFBv6t3jZWEGDO8FdG_bd-b272dTCs-zTuuSFsLfDE5vm5eOP3snzfTdhgbbrVr6PQQH-DHdaARCyIFUTG9d7aTkdMfQ3cxsJALKXHDsmzja2_xEus/s16000/poker%20togel.jpg'
-        var caption = 'Syarat & Ketentuan: ♠ EVENT POKER DAN TOGEL 🎱 \nUntuk INFO lebih lanjut chat ke ADMIN kami ya bos @csindoacejessica'
-        return tg.sendPhoto(msg.chat.id, url, caption, 'HTML')
-      }
-
-      // akhir deteksi pesan text
-    }
-
-    // akhir update message
-  }
-
-  // deteksi callback
-  if (update.callback_query) {
-    // proses di halaman berikutnya, biar gak terlalu panjang     
-    return prosesCallback(update.callback_query)
-  }
-
-}
+    </script>
+    <script>var audio = document.querySelector(".audio"); var bg = document.querySelector(".bg"); var isiSurat = document.querySelector(".pesan"); audio.src = musik; bg.style = "background-image: url('" + background + "')"; function tampil() { document.querySelector(".card").style = "transition: 0.5s all ease;transform: scale(0);opacity: 0;"; audio.play(); setTimeout(typeWriter, 1000); setTimeout(function () { document.querySelector(".content2").style.display = "block"; }, 400); } var i = 0; var speed = 100; isiSurat.value = ""; function typeWriter() { if (i < ucapanSurat.length) { isiSurat.value += ucapanSurat.charAt(i); i++; setTimeout(typeWriter, speed); } else { document.querySelector(".wa").style.display = "block"; } } var content = document.querySelector(".content"); var cpr = document.querySelector(".cpr").innerHTML; if (cpr != "Jeluga") { content.style.display = "none"; }function balasWA(){window.open("https://api.whatsapp.com/send?text=" + pesanWhatsapp, "_blank");}</script>
+  </body>
+</html>
